@@ -5,6 +5,9 @@ from services.fetch_data import (
     save_raw_json
 )
 
+from services.process_data import process_all_companies
+
+
 EXCEL_PATH = "data/company_id.xlsx"
 
 
@@ -15,6 +18,8 @@ def main():
     for company_id in company_ids:
         print(f"\nFetching data for {company_id}..")
         data = get_company_data(company_id)
+        
+
 
         # if data:
         #     print("API Response Keys:", data.keys())
@@ -23,6 +28,13 @@ def main():
             save_raw_json(company_id, data)
         else:
             print(f"[SKIPPED] Invalid data for {company_id}")
+
+        
+        print(f"\nProcessing data for ml..")
+        df = process_all_companies(company_ids)
+
+        print("\nML data set ready")
+        print(df.head())
 
 
 if __name__ == "__main__":
