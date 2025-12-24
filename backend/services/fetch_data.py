@@ -44,7 +44,7 @@ def validate_api_response(response: dict, company_id: str):
         print(f"[ERROR] Invalid data format for {company_id}")
         return False
 
-    for section  in ["balance_sheet", "profit_loss", "cash_flow"]:
+    for section  in ["balancesheet", "profitandloss", "cashflow"]:
         if section not in data or not data.get(section):
             print(f"[INFO] {company_id} missing or empty {section}")
             
